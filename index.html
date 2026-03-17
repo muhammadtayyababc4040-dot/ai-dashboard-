@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Business Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">📊 AI Dashboard</div>
+    <nav>
+      <a href="#" class="nav-item active" data-page="overview">🏠 Overview</a>
+      <a href="#" class="nav-item" data-page="sales">💳 Sales</a>
+      <a href="#" class="nav-item" data-page="inventory">📦 Inventory</a>
+      <a href="#" class="nav-item" data-page="ai-report">🤖 AI Report</a>
+    </nav>
+    <div class="sidebar-footer">Powered by Claude AI</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1 id="page-title">Business Overview</h1>
+      <div class="topbar-right">
+        <span id="current-date"></span>
+        <button id="refresh-btn" class="btn-primary">🔄 Refresh</button>
+      </div>
+    </header>
+
+    <!-- Overview -->
+    <section id="page-overview" class="page active">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Total Revenue</div>
+          <div class="kpi-value" id="kpi-revenue">€0</div>
+          <div class="kpi-change positive">▲ 12.4% vs last week</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Transactions</div>
+          <div class="kpi-value" id="kpi-transactions">0</div>
+          <div class="kpi-change positive">▲ 8.1% vs last week</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Avg Order Value</div>
+          <div class="kpi-value" id="kpi-avg">€0</div>
+          <div class="kpi-change negative">▼ 2.3% vs last week</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Stock Alerts</div>
+          <div class="kpi-value" id="kpi-alerts">0</div>
+          <div class="kpi-change neutral">Items low on stock</div>
+        </div>
+      </div>
+      <div class="charts-row">
+        <div class="card chart-card"><h3>Daily Revenue (This Week)</h3><canvas id="revenue-chart"></canvas></div>
+        <div class="card chart-card"><h3>Top Products</h3><canvas id="products-chart"></canvas></div>
+      </div>
+      <div class="card ai-summary-card">
+        <div class="ai-summary-header">
+          <span>🤖 AI Business Summary</span>
+          <button id="generate-summary-btn" class="btn-primary">Generate AI Summary</button>
+        </div>
+        <div id="ai-summary-output" class="ai-output">
+          <p class="placeholder">Click "Generate AI Summary" to get an AI-powered analysis of your business data.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sales -->
+    <section id="page-sales" class="page">
+      <div class="card">
+        <h3>Sales Transactions</h3>
+        <div class="table-toolbar">
+          <input type="text" id="sales-search" placeholder="Search transactions..." class="search-input" />
+          <button id="ai-flag-btn" class="btn-secondary">🤖 Flag Anomalies</button>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>ID</th><th>Item</th><th>Amount</th><th>Time</th><th>Payment</th><th>Status</th></tr></thead>
+          <tbody id="sales-tbody"></tbody>
+        </table>
+        <div id="anomaly-output" class="ai-output" style="margin-top:16px;display:none;"></div>
+      </div>
+    </section>
+
+    <!-- Inventory -->
+    <section id="page-inventory" class="page">
+      <div class="card">
+        <h3>Stock Inventory</h3>
+        <div class="table-toolbar">
+          <button id="ai-reorder-btn" class="btn-secondary">🤖 Reorder Suggestions</button>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Product</th><th>Category</th><th>Stock</th><th>Min Level</th><th>Status</th></tr></thead>
+          <tbody id="inventory-tbody"></tbody>
+        </table>
+        <div id="reorder-output" class="ai-output" style="margin-top:16px;display:none;"></div>
+      </div>
+    </section>
+
+    <!-- AI Report -->
+    <section id="page-ai-report" class="page">
+      <div class="card ai-report-card">
+        <h3>🤖 AI Report Generator</h3>
+        <p class="subtext">Describe the report you need — AI will generate it from your live business data.</p>
+        <textarea id="report-prompt" class="report-textarea" placeholder="e.g. Give me a weekly performance summary highlighting top products and any concerns..."></textarea>
+        <button id="generate-report-btn" class="btn-primary">Generate Report</button>
+        <div id="report-output" class="ai-output" style="margin-top:20px;display:none;"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
